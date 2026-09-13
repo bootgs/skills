@@ -14,6 +14,7 @@ Each skill is a self-contained directory under [`skills/`](./skills) with a `SKI
 | Skill | Description |
 |---|---|
 | [`bootgs-quickstart`](./skills/bootgs-quickstart) | Bootstraps a new boot.gs project: `tsconfig`, manifest, `clasp`, entry points. |
+| [`bootgs-architecture`](./skills/bootgs-architecture) | Controller → Service → Repository → Domain layering, the Interface+Impl convention, and a working `eslint-plugin-boundaries` config. |
 | [`bootgs-validation`](./skills/bootgs-validation) | Parameter validation (`@Min`, `@Max`, `@Email`, ...), Parse pipes, custom pipes. |
 | [`bootgs-client`](./skills/bootgs-client) | The Virtual Transport Layer contract and a client for `doGet`/`doPost`/`google.script.run`. |
 | [`bootgs-openapi`](./skills/bootgs-openapi) | Generates an OpenAPI 3.0 spec from `@RestController` classes via the TypeScript Compiler API. |

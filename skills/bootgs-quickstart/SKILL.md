@@ -70,7 +70,7 @@ src/
 └── main.ts        # entry point — see below
 ```
 
-Controllers must only call services, services must only call repositories — bootgs won't enforce this for you (there's no module system to scope it); it's a convention to hold by discipline or lint rule. See `bootgs-validation` for parameter validation inside controllers, `bootgs-openapi` for keeping a spec in sync with this layer.
+Controllers must only call services, services must only call repositories — bootgs won't enforce this for you (there's no module system to scope it). See `bootgs-architecture` for the full layering rules, an Interface+Impl convention, and a working `eslint-plugin-boundaries` config that enforces it mechanically; `bootgs-validation` for parameter validation inside controllers; `bootgs-openapi` for keeping a spec in sync with this layer.
 
 ## Entry point wiring
 
