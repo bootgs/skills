@@ -1,0 +1,5 @@
+{
+  "name": "apps-script",
+  "version": "1.0.0",
+  "description": "Framework-agnostic Google Apps Script skills — triggers, built-in services, the clasp CLI workflow, the apps-script-utils guard/utility library, and Marketplace publishing/compliance. Usable without bootgs; apps-script-utils also pairs naturally with it."
+}

@@ -1,0 +1,20 @@
+{
+  "name": "bootgs-skills",
+  "interface": {
+    "displayName": "Boot.gs Skills"
+  },
+  "plugins": [
+    {
+      "name": "bootgs",
+      "source": "./plugins/bootgs",
+      "description": "Skills for building Google Apps Script backends with the bootgs framework: project bootstrap, parameter validation, client/Virtual Transport Layer, and OpenAPI generation.",
+      "category": "Google Apps Script"
+    },
+    {
+      "name": "apps-script",
+      "source": "./plugins/apps-script",
+      "description": "Framework-agnostic Google Apps Script skills — triggers, built-in services, the clasp CLI workflow, the apps-script-utils guard/utility library, and Marketplace publishing/compliance.",
+      "category": "Google Apps Script"
+    }
+  ]
+}
