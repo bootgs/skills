@@ -7,6 +7,7 @@ Boot.gs is a NestJS/Spring Boot-style TypeScript framework for building Google A
 ## Skills: boot.gs
 
 - [bootgs-quickstart](skills/bootgs-quickstart/SKILL.md): Bootstraps a new boot.gs project — TypeScript config, appsscript.json manifest, clasp, entry-point wiring.
+- [bootgs-architecture](skills/bootgs-architecture/SKILL.md): Controller → Service → Repository → Domain layering, the Interface+Impl convention, and a working eslint-plugin-boundaries config.
 - [bootgs-validation](skills/bootgs-validation/SKILL.md): Parameter validation decorators (@Min, @Max, @Email, ...), Parse pipes, custom pipes.
 - [bootgs-client](skills/bootgs-client/SKILL.md): The Virtual Transport Layer contract and a client for doGet/doPost/google.script.run.
 - [bootgs-openapi](skills/bootgs-openapi/SKILL.md): Generates an OpenAPI 3.0 spec from @RestController classes via the TypeScript Compiler API.

@@ -7,16 +7,17 @@
   },
   "metadata": {
     "description": "Boot.gs Skills",
-    "version": "0.5.0"
+    "version": "0.6.0"
   },
   "plugins": [
     {
       "name": "bootgs",
-      "description": "Skills for building Google Apps Script backends with the bootgs framework: project bootstrap, parameter validation, client/Virtual Transport Layer, and OpenAPI generation.",
+      "description": "Skills for building Google Apps Script backends with the bootgs framework: project bootstrap, layered architecture enforcement, parameter validation, client/Virtual Transport Layer, and OpenAPI generation.",
       "source": "./",
       "strict": false,
       "skills": [
         "./skills/bootgs-quickstart",
+        "./skills/bootgs-architecture",
         "./skills/bootgs-validation",
         "./skills/bootgs-client",
         "./skills/bootgs-openapi"
