@@ -15,8 +15,10 @@
     "bootgs",
     "google-apps-script",
     "apps-script",
+    "clasp",
     "agent-skills",
     "claude-code",
+    "gemini-cli",
     "skills"
   ],
   "skills": "./skills/"

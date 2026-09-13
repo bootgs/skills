@@ -1,0 +1,32 @@
+# Bootgs Skills
+
+> Agent Skills for the boot.gs Google Apps Script framework (decorators, dependency injection, routing, validation, OpenAPI generation) and for plain Google Apps Script development that doesn't need boot.gs at all. Each skill is a self-contained `SKILL.md` following the open Agent Skills specification (agentskills.io), installable in Claude Code, Gemini CLI, Cursor, Codex, and any client that implements the spec.
+
+Boot.gs is a NestJS/Spring Boot-style TypeScript framework for building Google Apps Script backends. This repository packages the operational knowledge for working with it — plus knowledge for Google Apps Script generally — as machine-readable skills an AI coding agent loads on demand, rather than documentation a human reads once. Gotchas, live-fetched data (Google's current quotas, Marketplace review checklist, published package versions), and bundled scripts take priority over prose a model already knows.
+
+## Skills: boot.gs
+
+- [bootgs-quickstart](skills/bootgs-quickstart/SKILL.md): Bootstraps a new boot.gs project — TypeScript config, appsscript.json manifest, clasp, entry-point wiring.
+- [bootgs-validation](skills/bootgs-validation/SKILL.md): Parameter validation decorators (@Min, @Max, @Email, ...), Parse pipes, custom pipes.
+- [bootgs-client](skills/bootgs-client/SKILL.md): The Virtual Transport Layer contract and a client for doGet/doPost/google.script.run.
+- [bootgs-openapi](skills/bootgs-openapi/SKILL.md): Generates an OpenAPI 3.0 spec from @RestController classes via the TypeScript Compiler API.
+
+## Skills: Google Apps Script (framework-agnostic)
+
+- [apps-script-triggers](skills/apps-script-triggers/SKILL.md): Simple vs. installable triggers, event object shapes, authorization differences.
+- [apps-script-services](skills/apps-script-services/SKILL.md): Quota-safe SpreadsheetApp/PropertiesService/CacheService/LockService/UrlFetchApp, V8 runtime API gaps, custom spreadsheet function constraints.
+- [apps-script-ui](skills/apps-script-ui/SKILL.md): Menus, sidebars, modal dialogs, the progress-spinner pattern, the private-function google.script.run pitfall.
+- [apps-script-clasp-workflow](skills/apps-script-clasp-workflow/SKILL.md): The clasp CLI — auth, push vs. deploy, versioning, multi-environment setups.
+- [apps-script-utils](skills/apps-script-utils/SKILL.md): The apps-script-utils guard/utility library (isX/nonX/requireX, A1-notation, typed exceptions).
+- [apps-script-marketplace-publish](skills/apps-script-marketplace-publish/SKILL.md): Audits an add-on against the live Google Workspace Marketplace review checklist and guides publishing.
+
+## Reference
+
+- [README](README.md): Installation for Claude Code, Gemini CLI, Cursor, and any agent via `npx skills add`; the CRUD npm scripts for managing skills; how to add a new skill.
+- [marketplace.json](.claude-plugin/marketplace.json): Claude Code plugin marketplace manifest — two plugins, `bootgs` and `apps-script`.
+- [gemini-extension.json](gemini-extension.json): Root Gemini CLI extension manifest exposing every skill in `skills/`.
+- [plugin.json](plugin.json): Generic agent-plugins.org manifest for Codex and other compatible clients.
+
+## Optional
+
+- [LICENSE](LICENSE): Apache License 2.0.
