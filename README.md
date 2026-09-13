@@ -5,7 +5,7 @@
 
 Agent Skills for [boot.gs](https://github.com/bootgs/boot) – a NestJS/Spring Boot-style framework for Google Apps Script (decorators, dependency injection, routing, validation) — plus a set of skills for plain Google Apps Script development that don't require boot.gs at all.
 
-Each skill is a self-contained directory under [`skills/`](./skills) with a `SKILL.md` file and, where useful, `scripts/`, `references/`, or `assets/`. The format follows the open [Agent Skills specification](https://agentskills.io/specification), so every skill here works with any agent that implements it – not just Claude.
+Each skill is a self-contained directory under [`skills/`](./skills) with a `SKILL.md` file and, where useful, `scripts/`, `references/`, or `assets/`. The format follows the open [Agent Skills specification](https://agentskills.io/specification), so every skill here works with any agent that implements it – not just Claude. An [`llms.txt`](./llms.txt) at the repo root gives agents and crawlers a short index of what's here.
 
 ## Skills
 
