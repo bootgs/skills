@@ -1,0 +1,7 @@
+.DS_Store
+.idea/
+.claude/.cc-writes
+.claude/settings.local.json
+.junie/
+__pycache__/
+node_modules/
