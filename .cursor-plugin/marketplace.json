@@ -1,5 +1,4 @@
 {
-  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "bootgs-skills",
   "owner": {
     "name": "Maksym Stoianov",
