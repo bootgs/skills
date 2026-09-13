@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "skills",
+  "version": "0.5.0",
+  "description": "Agent Skills for the boot.gs Google Apps Script framework and plain Google Apps Script development.",
+  "author": {
+    "name": "Maksym Stoianov",
+    "email": "stoianov.maksym@gmail.com",
+    "url": "https://maksymstoianov.com"
+  },
+  "homepage": "https://github.com/bootgs/skills#readme",
+  "repository": "https://github.com/bootgs/skills",
+  "license": "Apache-2.0",
+  "keywords": [
+    "bootgs",
+    "google-apps-script",
+    "apps-script",
+    "agent-skills",
+    "claude-code",
+    "skills"
+  ],
+  "skills": "./skills/"
+}

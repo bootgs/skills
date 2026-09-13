@@ -50,7 +50,13 @@ Install just the boot.gs skills, just the framework-agnostic ones, or both:
 
 ### Gemini CLI
 
-This repository also ships a Gemini CLI marketplace manifest (`.agents/plugins/marketplace.json`, following the pattern used by [google/skills](https://github.com/google/skills/blob/main/.agents/plugins/marketplace.json)), with the same two groups packaged as standalone extensions under [`plugins/`](./plugins). `gemini extensions install` only accepts a GitHub URL for a repository whose `gemini-extension.json` lives at the root, so to install one group from this repository, clone it and point at the local path:
+Install every skill in one extension, discovered automatically from the root [`gemini-extension.json`](./gemini-extension.json) and [`skills/`](./skills):
+
+```bash
+gemini extensions install https://github.com/bootgs/skills
+```
+
+To install just the bootgs skills or just the framework-agnostic ones, this repository also ships a Gemini CLI marketplace manifest (`.agents/plugins/marketplace.json`, following the pattern used by [google/skills](https://github.com/google/skills/blob/main/.agents/plugins/marketplace.json)), with the same two groups packaged as standalone extensions under [`plugins/`](./plugins). Installing a single group from a URL requires cloning first, since `gemini extensions install` only reads a `gemini-extension.json` from the exact path given:
 
 ```bash
 git clone https://github.com/bootgs/skills
