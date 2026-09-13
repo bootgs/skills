@@ -11,6 +11,36 @@
 import typescriptParser from "@typescript-eslint/parser";
 import boundaries from "eslint-plugin-boundaries";
 
+/**
+ * OPTIONAL: only keep these if the project funnels each layer's public
+ * surface through an index.ts barrel file. If it doesn't — importing a
+ * layer's files directly is just how the project works — delete this
+ * array and its spread below instead of trying to disable it per rule.
+ */
+const OPTIONAL_BARREL_EXPORT_RULES = [
+  {
+    to: { type: "domain", captured: { segment: ["entity", "dto", "enums", "types"] } },
+    disallow: { to: { internalPath: "!index.ts" } },
+    message: "Access to domain {{to.captured.segment}} is only allowed through index.ts",
+  },
+  {
+    to: { type: "domain", captured: { segment: "constants" } },
+    disallow: { to: { internalPath: "!(index.ts|constants.ts)" } },
+    message: "Access to domain constants is only allowed through index.ts or constants.ts",
+  },
+  {
+    to: [{ type: "controller" }, { type: "service" }],
+    disallow: { to: { internalPath: "!index.ts" } },
+    message: "Access to {{to.type}} is only allowed through index.ts",
+  },
+  {
+    // "SettingsRepositoryImpl" is the one storage-primitive exception — see the skill's Gotchas.
+    to: { type: "repository" },
+    disallow: { to: { internalPath: "!(index.ts|SettingsRepositoryImpl.ts)" } },
+    message: "Access to repository is only allowed through index.ts or SettingsRepositoryImpl.ts",
+  },
+];
+
 export default {
   files: ["src/**/*.ts"],
   languageOptions: {
@@ -38,27 +68,16 @@ export default {
       {
         default: "allow",
         rules: [
-          {
-            to: { type: "domain", captured: { segment: ["entity", "dto", "enums", "types"] } },
-            disallow: { to: { internalPath: "!index.ts" } },
-            message: "Access to domain {{to.captured.segment}} is only allowed through index.ts",
-          },
-          {
-            to: { type: "domain", captured: { segment: "constants" } },
-            disallow: { to: { internalPath: "!(index.ts|constants.ts)" } },
-            message: "Access to domain constants is only allowed through index.ts or constants.ts",
-          },
-          {
-            to: [{ type: "controller" }, { type: "service" }],
-            disallow: { to: { internalPath: "!index.ts" } },
-            message: "Access to {{to.type}} is only allowed through index.ts",
-          },
-          {
-            // "SettingsRepositoryImpl" is the one storage-primitive exception — see the skill's Gotchas.
-            to: { type: "repository" },
-            disallow: { to: { internalPath: "!(index.ts|SettingsRepositoryImpl.ts)" } },
-            message: "Access to repository is only allowed through index.ts or SettingsRepositoryImpl.ts",
-          },
+          // ---------------------------------------------------------------
+          // OPTIONAL: barrel-export enforcement.
+          //
+          // Whether a layer funnels its public surface through index.ts is
+          // a project choice, not a requirement of the layering itself —
+          // see the skill's Gotchas. Delete this whole block if the
+          // project imports layer files directly instead of through
+          // barrels; the layer-direction rules below are unaffected.
+          ...OPTIONAL_BARREL_EXPORT_RULES,
+          // ---------------------------------------------------------------
           {
             from: { type: "controller" },
             disallow: { to: { type: "controller", captured: { controller: "!{{from.captured.controller}}" } } },

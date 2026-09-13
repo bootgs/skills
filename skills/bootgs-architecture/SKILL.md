@@ -12,7 +12,7 @@ metadata:
 
 ## Available files
 
-- **`assets/eslint-boundaries.config.ts`** — a working [`eslint-plugin-boundaries`](https://www.npmjs.com/package/eslint-plugin-boundaries) config enforcing every rule below. Copy it in and adjust the `files` glob to your source root.
+- **`assets/eslint-boundaries.config.ts`** — a working [`eslint-plugin-boundaries`](https://www.npmjs.com/package/eslint-plugin-boundaries) config enforcing every rule below. Copy it in and adjust the `files` glob to your source root. The `index.ts`-barrel rules are marked `OPTIONAL` — see Gotchas.
 
 ## Layers and the one rule that matters
 
@@ -68,13 +68,13 @@ Swapping `WidgetRepositoryImpl` for a different storage backend later touches on
 ## Gotchas
 
 - **The one legitimate cross-repository import is a storage primitive, not a shortcut.** A repository may depend on another repository only when that other repository is a genuinely generic, business-logic-free storage wrapper — for example, a settings/key-value repository built directly on `PropertiesService` that other repositories reuse instead of re-implementing property-access boilerplate. This is not precedent for two domain-specific repositories depending on each other. If a review argues "we already allow one exception," check whether the dependency is actually a storage primitive first — if it has any business logic of its own, it isn't.
-- **Public exports only through `index.ts`.** Reaching past a layer's `index.ts` into an internal file it didn't choose to export defeats the boundary even where the language permits it — treat a deep import as a bug, not a shortcut.
+- **Whether a layer funnels its public surface through `index.ts` is a project choice, not something this skill mandates.** Barrel-exporting a layer (and treating everything else in it as private) makes internal reshuffling cheap and gives every consumer one import path — at the cost of a file to maintain and an extra hop when navigating. Pick a style and apply it consistently: if the project uses `index.ts` barrels, a deep import that reaches past one is a real boundary violation worth flagging; if it doesn't, importing a layer's files directly is just how the project works. The bundled ESLint rules for barrel enforcement are marked and separated from the core layer-direction rules in `assets/eslint-boundaries.config.ts` — delete that block if the project doesn't use barrels.
 - **Domain must not import forward.** An entity that imports a repository or exception "just this once" to validate itself against stored data has already moved orchestration into the model layer — that validation belongs in a service.
 - **Keep DTOs one-per-file in `domain/dto/`.** `bootgs-openapi`'s generator resolves request/response shapes from exactly this convention — a DTO folded into a larger file or inlined in a controller signature won't resolve into a clean schema (see `bootgs-openapi`).
 
 ## Enforcing it with ESLint
 
-`assets/eslint-boundaries.config.ts` implements every rule in the table above, including the storage-primitive exception (generalize the filename match if your project's primitive repository is named differently). Add it to a flat ESLint config:
+`assets/eslint-boundaries.config.ts` implements every rule in the table above, including the storage-primitive exception (generalize the filename match if your project's primitive repository is named differently). The `index.ts`-barrel rules are marked `OPTIONAL` and grouped separately — keep them only if the project actually funnels layers through barrel files. Add the config to a flat ESLint config:
 
 ```ts
 import boundariesConfig from "./eslint-boundaries.config";
