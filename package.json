@@ -1,0 +1,37 @@
+{
+  "name": "bootgs-skills",
+  "version": "0.4.0",
+  "private": true,
+  "description": "Agent Skills for the boot.gs Google Apps Script framework and plain Google Apps Script development.",
+  "keywords": [
+    "bootgs",
+    "google-apps-script",
+    "apps-script",
+    "agent-skills",
+    "claude-code",
+    "skills"
+  ],
+  "homepage": "https://github.com/bootgs/skills#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bootgs/skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bootgs/skills/issues"
+  },
+  "author": {
+    "name": "Maksym Stoianov",
+    "email": "stoianov.maksym@gmail.com",
+    "url": "https://maksymstoianov.com"
+  },
+  "license": "Apache-2.0",
+  "scripts": {
+    "skills:init": "npx --yes skills init",
+    "skills:add": "npx --yes skills add --agent '*' --yes",
+    "skills:list": "npx --yes skills list",
+    "skills:find": "npx --yes skills find",
+    "skills:use": "npx --yes skills use",
+    "skills:update": "npx --yes skills update --yes",
+    "skills:remove": "npx --yes skills remove --yes"
+  }
+}
