@@ -23,7 +23,8 @@ Each skill is a self-contained directory under [`skills/`](./skills) with a `SKI
 | Skill | Description |
 |---|---|
 | [`apps-script-triggers`](./skills/apps-script-triggers) | Simple vs. installable triggers, event shapes, quotas. |
-| [`apps-script-services`](./skills/apps-script-services) | Quota-safe use of `SpreadsheetApp`, `PropertiesService`, `CacheService`, `LockService`, `UrlFetchApp`. |
+| [`apps-script-services`](./skills/apps-script-services) | Quota-safe use of `SpreadsheetApp`, `PropertiesService`, `CacheService`, `LockService`, `UrlFetchApp`; V8 runtime API gaps; custom spreadsheet functions. |
+| [`apps-script-ui`](./skills/apps-script-ui) | Menus, sidebars, modal dialogs, the progress-spinner pattern, and the private-function `google.script.run` pitfall. |
 | [`apps-script-clasp-workflow`](./skills/apps-script-clasp-workflow) | The `clasp` CLI: push/deploy, versioning, multi-environment setups. |
 | [`apps-script-utils`](./skills/apps-script-utils) | The `apps-script-utils` guard/utility library. Independent of boot.gs, but used by it internally — already available in a boot.gs project with no extra install. |
 | [`apps-script-marketplace-publish`](./skills/apps-script-marketplace-publish) | Audits an add-on against the current Google Workspace Marketplace requirements (fetched live from the official docs) and guides publishing. |
