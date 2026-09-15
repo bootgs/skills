@@ -42,6 +42,8 @@ Every category in the library follows the same three-function shape — learn it
 
 Prefer `requireX` at the boundary of a function (repository/service entry points) over manual `if (!x) throw ...` — the thrown exception type is consistent across the whole codebase and callers can `catch` a specific exception class instead of pattern-matching a message string.
 
+This is the target shape the library is rolling out toward, not a guarantee for every existing guard yet — some `isX` functions, particularly in `lang/base`, don't have a `nonX` or `requireX` counterpart published yet. `references/api-reference.md` lists exactly which variants exist per category; don't assume a `nonX`/`requireX` exists for a given `isX` without checking it there first.
+
 ## Worked examples
 
 ```ts
@@ -64,7 +66,7 @@ if (isEmail(value)) {
 | `appsscript/sheet` | A1-notation parsing/formatting, row helpers, `GridRange` containment checks, sheet lookup/guards — the largest category (~35 functions) |
 | `appsscript/{slide,admin,ui,net}` | Service-specific helpers (`isAdmin`, `isUi`, `checkMultipleAccount`, `requireValidToken`) |
 | `appsscript/{drive,doc,form}` | Reserved namespaces — currently empty, don't assume functions exist here without checking `node_modules/apps-script-utils/dist` first |
-| `lang/base` | Generic guards: `isArray`, `isBoolean`, `isEmpty`, `isNil`, `isObject`, `isString`, ... plus their `nonX`/`requireX` pairs |
+| `lang/base` | Generic guards: `isArray`, `isBoolean`, `isEmpty`, `isNil`, `isObject`, `isString`, ... — `nonX`/`requireX` pairs exist for some but not all of these yet, check `references/api-reference.md` |
 | `lang/string` | `toCamelCase`, `toKebabCase`, `toSnakeCase`, `isEmail`, `isValidSlug`, `isValidVersion` + `versionCompare`, `escapeRegExp` |
 | `lang/number` | `isInteger`, `toInteger`, `nonNegative` |
 | `lang/array` | `chunk`, `is2DArray`, `transpose` |
