@@ -25,7 +25,7 @@ Full catalog by category. All guard-style functions follow the `isX`/`nonX`/`req
 
 ## lang/base
 
-24 guards, each with a mirrored `nonX`: `isArray`, `isBoolean`, `isEmpty`, `isNil`, `isObject`, `isString`, `isNumber`, `isFunction`, `isDate`, `isUndefined`, `isNull`, ... plus `requireNonNull(value, message?)` and `requireString(value, message?)` as the two most commonly used assertions.
+18 guards: `isArray`, `isBoolean`, `isEmpty`, `isException`, `isFunction`, `isFunctionLike`, `isLength`, `isNil`, `isNull`, `isNumber`, `isNumberLike`, `isObject`, `isObjectLike`, `isRegExp`, `isScalar`, `isString`, `isSymbol`, `isUndefined`. Only 11 have a mirrored `nonX` — `isArray`, `isBoolean`, `isEmpty`, `isFunction`, `isNil`, `isNull`, `isNumber`, `isScalar`, `isString`, `isSymbol`, `isUndefined`; `isException`, `isFunctionLike`, `isLength`, `isNumberLike`, `isObject`, `isObjectLike`, and `isRegExp` don't. There is no `isDate`. Plus `requireNonNull(value, message?)` and `requireString(value, message?)` as the two most commonly used assertions.
 
 ## lang/string
 
