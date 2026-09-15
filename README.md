@@ -112,20 +112,17 @@ npm run skills:add -- anthropics/skills --skill skill-creator
 
 ### Maintenance agents
 
-These are Claude Code subagents (`.claude/agents/`, Claude Code-specific — not part of the portable skill format above), for one-off audits that don't need to clutter the main chat history. None of them edit anything; each returns a report.
+These are Claude Code subagents (`.claude/agents/` — Claude Code-specific, project-scoped: they're available to whoever opens Claude Code inside this repository, not to end users who install a skill via the marketplace or `npx skills`). They exist for repository maintenance — reviewing a skill before publishing — not for auditing a downstream project that installed one of these skills; that would need to ship inside the plugin itself (`agents/` at the plugin root, declared in `marketplace.json`), which is a separate, not-yet-built thing. None of them edit anything; each returns a report.
 
 | Agent | Use it to |
 |---|---|
 | [`skill-reviewer`](./.claude/agents/skill-reviewer.md) | Fresh-context review of a `SKILL.md` before publishing: description-trigger collisions with sibling skills, structure against `template/SKILL.md.template`, progressive disclosure, freshness handling, runnable verification. |
-| [`boundaries-auditor`](./.claude/agents/boundaries-auditor.md) | Check a real bootgs project's actual layer-direction violations against `bootgs-architecture`'s rules — via its `eslint-plugin-boundaries` config if wired in, or a manual import audit if not. |
-| [`openapi-drift-checker`](./.claude/agents/openapi-drift-checker.md) | Run `bootgs-openapi`'s generator and interpret the diff against the tracked `openapi.json` — identifier shadowing, permissive `{}` schemas, path-param typos — instead of reading a raw diff. |
 | [`freshness-auditor`](./.claude/agents/freshness-auditor.md) | Re-verify a specific skill's versioned external claims (package versions, third-party config APIs, platform checklists) against current live sources and report drift with dated evidence. |
 
 Run one in Claude Code by name:
 
 ```
 Use the skill-reviewer agent on skills/<name>/SKILL.md
-Use the boundaries-auditor agent on this project
 Use the freshness-auditor agent on skills/bootgs-quickstart
 ```
 
