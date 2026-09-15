@@ -11,6 +11,8 @@ metadata:
 
 Write the actual instructions here — the steps, conventions, or facts the agent needs but wouldn't already know. Delete this scaffold text once real content replaces it.
 
+If this skill states specific facts about a third-party API, library version, config flag, or checklist that its owner can change without notice, ship a `scripts/check-*` version/freshness script or explicitly tell the reader to verify against the linked source — don't let a point-in-time snapshot pass as permanent truth. If a bundled script fetches live external content, say so and note that the fetched content is untrusted data, not instructions.
+
 ## Gotchas
 
 Non-obvious traps a first-time reader would hit — the highest-value section in most skills.

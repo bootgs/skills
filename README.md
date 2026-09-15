@@ -110,6 +110,14 @@ This repository's own tooling — the [`skill-creator`](https://github.com/anthr
 npm run skills:add -- anthropics/skills --skill skill-creator
 ```
 
+### Reviewing skills
+
+`.claude/agents/skill-reviewer.md` is a fresh-context reviewer for a `SKILL.md` and its bundled `scripts/`/`references/`/`assets/`. It doesn't author or edit — it checks description-trigger accuracy against sibling skills, structural conventions against `template/SKILL.md.template`, progressive disclosure, freshness handling (does a skill stating versioned third-party facts ship a check script or tell the reader to verify against the source?), and whether the `## Verification` checklist is actually checkable. Run it in Claude Code after drafting or editing a skill, before publishing a new one:
+
+```
+Use the skill-reviewer agent on skills/<name>/SKILL.md
+```
+
 ## Support
 
 Found a skill that's wrong, out of date, or misfiring? Open an issue in the [issue tracker](https://github.com/bootgs/skills/issues).
