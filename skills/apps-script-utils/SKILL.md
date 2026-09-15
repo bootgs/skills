@@ -81,3 +81,9 @@ Load `references/api-reference.md` when you need the exact signature of a specif
 
 - `appsscript/drive`, `appsscript/doc`, `appsscript/form` are placeholder namespaces with no exports yet — don't guess a function name into existence for these services.
 - `requireX` exceptions extend the package's own `Exception` base, not `Error` directly in every case. If used inside a bootgs `@ExceptionHandler` (see the `bootgs-validation` skill), catch `Error` (their common ancestor) or the specific exception classes — not bootgs's `AppException`/`HttpException`, which these are unrelated to.
+
+## Verification
+
+- [ ] Ran `scripts/check-latest-version.sh` before relying on a specific function's presence or signature, not just this document.
+- [ ] For `appsscript/{drive,doc,form}`, confirmed the function actually exists in `node_modules/apps-script-utils/dist` rather than assuming the namespace is populated.
+- [ ] Used the matching `isX`/`nonX`/`requireX` variant instead of hand-rolling an equivalent guard or a generic `if (!x) throw`.

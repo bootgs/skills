@@ -12,7 +12,7 @@ metadata:
 
 ## Available files
 
-- **`assets/eslint-boundaries.config.ts`** — a working [`eslint-plugin-boundaries`](https://www.npmjs.com/package/eslint-plugin-boundaries) config enforcing every rule below. Copy it in and adjust the `files` glob to your source root. The `index.ts`-barrel rules are marked `OPTIONAL` — see Gotchas.
+- **`assets/eslint-boundaries.config.ts`** — a working [`eslint-plugin-boundaries`](https://www.npmjs.com/package/eslint-plugin-boundaries) config enforcing every rule below. Copy it in and adjust the `files` glob to your source root. The `index.ts`-barrel rules are marked `OPTIONAL` — see Gotchas. The rule option names (`boundaries/elements`, `boundaries/dependencies`, the `captured`/`disallow`/`to` syntax) are a versioned fact about the plugin's own API, not this skill's — if lint throws an unrecognized-option error on install, check the installed `eslint-plugin-boundaries` version's own docs/changelog before assuming this config is wrong.
 
 ## Layers and the one rule that matters
 
