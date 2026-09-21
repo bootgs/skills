@@ -1,6 +1,6 @@
 ---
 name: apps-script-marketplace-publish
-description: Audits a Google Workspace add-on against the current official Google Workspace Marketplace app review requirements, and guides the full publishing process (Marketplace SDK configuration, OAuth consent screen, store listing, submission for review). Use when preparing an add-on for Marketplace submission, investigating why an app was rejected, or asked what's needed to publish a Google Workspace or Editor add-on. Framework-agnostic — applies with or without bootgs.
+description: Audits a Google Workspace add-on against the current official Google Workspace Marketplace app review requirements, and guides the full publishing process (Marketplace SDK configuration, OAuth consent screen, store listing, submission for review). Use when preparing an add-on for Marketplace submission, investigating why an app was rejected, or asked what's needed to publish a Google Workspace or Editor add-on. Framework-agnostic — applies with or without bootgs. Not for cutting versions or managing dev/staging/prod script projects (`apps-script-clasp-workflow`).
 license: Apache-2.0
 compatibility: scripts/fetch-review-requirements.py requires Python 3 and curl.
 metadata:
@@ -13,6 +13,7 @@ metadata:
 ## Available scripts
 
 - **`scripts/fetch-review-requirements.py`** — fetches the current official app-review checklist (general + per-integration-type) straight from Google's docs. Run with `--help` for options.
+- **`scripts/fetch_policy.py`** — the shared fetching contract the script above fetches through: it names this script and the repository in the User-Agent, reads `robots.txt` before the target, paces requests, and stops rather than retries on 403/429/503. Vendored from `template/scripts/fetch_policy.py`; don't edit it here.
 
 ## Why this fetches live instead of listing a checklist
 
@@ -34,8 +35,10 @@ Pick the `--integration` value matching what the add-on actually is — most App
 | A Sheets/Docs/Slides/Gmail/Calendar/Meet add-on using the modern homepage-card manifest (`CardService`, cross-host) | `Google Workspace add-on` |
 | A legacy Docs/Sheets/Slides/Forms add-on using menu items only (`onOpen`/`onInstall`), no homepage card | `Editor add-on` |
 | An interactive Google Chat bot | `Google Chat app` |
-| An app that only integrates via the Drive UI (open-with, etc.) | `Drive app` |
+| An app that only integrates via the Drive UI (open-with, etc.) | `Google Drive app` |
 | A web app registered only via its URL, no Apps Script surface | `Web app` |
+
+Those values are Google's own wording and they do change — `--list-integrations` prints whatever the live page currently uses, and is the authority if the table above has drifted.
 
 A single listing can combine integrations (e.g. a Google Workspace add-on that's also a Drive app) — run the script once per applicable integration and union the results. Editor add-on and Google Workspace add-on have almost entirely different criteria; picking the wrong one wastes the whole audit.
 
@@ -73,7 +76,7 @@ Stable sequence; the specifics of each step change over time, so verify against 
 
 - **OAuth verification runs on its own, slower clock.** It has a multi-week timeline for sensitive/restricted scopes, separate from the "several days" app review turnaround — start it well before intending to submit the listing, not after.
 - **"(recommended)" items aren't optional in practice.** The script tags Google's own "(Recommended)" items distinctly, but reviewers apply judgment; a skipped recommended item (title-case naming, for instance) is a plausible soft-rejection reason even though it isn't phrased as a hard requirement.
-- **Sensitive/restricted Drive scopes require a security assessment, not just OAuth verification** — these are two separate approval tracks (see the Drive app criteria the script returns) and the assessment has its own lead time.
+- **Sensitive/restricted Drive scopes require a security assessment, not just OAuth verification** — these are two separate approval tracks (see the `Google Drive app` criteria the script returns) and the assessment has its own lead time.
 
 ## Verification
 
