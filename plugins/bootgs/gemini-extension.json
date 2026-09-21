@@ -1,5 +1,6 @@
 {
   "name": "bootgs",
   "version": "1.0.0",
-  "description": "Skills for building Google Apps Script backends with the bootgs framework: project bootstrap, parameter validation, client/Virtual Transport Layer, and OpenAPI generation."
+  "description": "Skills for building Google Apps Script backends with the bootgs framework: project bootstrap, layered architecture enforcement, parameter validation, client/Virtual Transport Layer, and OpenAPI generation.",
+  "license": "Apache-2.0"
 }
