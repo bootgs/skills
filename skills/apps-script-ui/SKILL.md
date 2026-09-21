@@ -1,6 +1,6 @@
 ---
 name: apps-script-ui
-description: Builds Google Apps Script UI — custom menus, sidebars, modal dialogs, toast notifications, and alert/prompt dialogs via HtmlService and SpreadsheetApp.getUi(). Covers the modal progress-spinner pattern for long-running operations. Use when adding a menu item, sidebar, or dialog to a Sheets/Docs/Slides add-on, or when a dialog button silently does nothing. Framework-agnostic — applies with or without bootgs.
+description: Builds Google Apps Script UI — custom menus, sidebars, modal dialogs, toast notifications, and alert/prompt dialogs via HtmlService and SpreadsheetApp.getUi(). Covers the modal progress-spinner pattern for long-running operations. Use when adding a menu item, sidebar, or dialog to a Sheets/Docs/Slides add-on, or when a dialog button silently does nothing. Framework-agnostic — applies with or without bootgs. Not for the quota, locking and batching concerns behind a slow action (`apps-script-services`), nor for Marketplace review and publishing (`apps-script-marketplace-publish`).
 license: Apache-2.0
 metadata:
   author: Maksym Stoianov

@@ -1,6 +1,6 @@
 ---
 name: apps-script-utils
-description: Documents apps-script-utils, a standalone guard/utility library for Google Apps Script (isX/nonX/requireX convention, A1-notation and sheet helpers, string/number/array helpers, typed exceptions, HTML/JSON/path helpers). Use when writing Apps Script code that needs input guards, spreadsheet range parsing, or common data utilities. Independent of any framework — also used internally by bootgs, so the two pair naturally if the project already uses bootgs.
+description: Documents apps-script-utils, a standalone guard/utility library for Google Apps Script (isX/nonX/requireX convention, A1-notation and sheet helpers, string/number/array helpers, typed exceptions, HTML/JSON/path helpers). Use when writing Apps Script code that needs input guards, spreadsheet range parsing, or common data utilities. Independent of any framework — also used internally by bootgs, so the two pair naturally if the project already uses bootgs. Not for platform quotas and limits (`apps-script-services`), nor for trigger or UI behaviour (`apps-script-triggers`, `apps-script-ui`).
 license: Apache-2.0
 compatibility: scripts/check-latest-version.sh requires curl and python3.
 metadata:
@@ -14,6 +14,7 @@ metadata:
 ## Available files
 
 - **`references/api-reference.md`** — full function catalog by category with signatures. Load on demand (see Categories below).
+- **`scripts/fetch_policy.py`** — the shared fetching contract the version check fetches through: it names the script and the repository in the User-Agent, reads `robots.txt` before the target, paces requests, and stops rather than retries on 403/429/503. Vendored from `template/scripts/fetch_policy.py`; don't edit it here.
 - **`scripts/check-latest-version.sh`** — checks the current published version against what's installed. Run with `--help` for options.
 
 `apps-script-utils` is a standalone package — no framework required. Install it directly in any Apps Script or plain TypeScript project:

@@ -1,6 +1,6 @@
 ---
 name: apps-script-triggers
-description: Explains Google Apps Script's simple vs installable triggers, their event object shapes, authorization differences, and how to register/manage installable triggers programmatically without duplicating them. Use when adding onOpen/onEdit/onChange/onFormSubmit/time-driven behavior, or when a trigger isn't firing, is duplicated, or fails with an authorization error. Framework-agnostic — applies with or without bootgs.
+description: Explains Google Apps Script's simple vs installable triggers, their event object shapes, authorization differences, and how to register/manage installable triggers programmatically without duplicating them. Use when adding onOpen/onEdit/onChange/onFormSubmit/time-driven behavior, or when a trigger isn't firing, is duplicated, or fails with an authorization error. Framework-agnostic — applies with or without bootgs. Not for quota-safe service usage or locking (`apps-script-services`), nor for getting a fix out to installed users (`apps-script-clasp-workflow`).
 license: Apache-2.0
 metadata:
   author: Maksym Stoianov
