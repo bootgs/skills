@@ -24,12 +24,18 @@
 #   1  bad usage
 #   2  registry lookup failed for a requested package
 #
+# Fetching goes through scripts/fetch_policy.py, which identifies this script
+# in its User-Agent, reads robots.txt first, paces requests, and stops rather
+# than retries on 403/429/503.
+#
 # Requires: curl, python3
 
 set -euo pipefail
 
+HERE="$(cd "$(dirname "$0")" && pwd)"
+
 usage() {
-  sed -n '2,21p' "$0" | sed 's/^# \{0,1\}//'
+  sed -n '2,31p' "$0" | sed 's/^# \{0,1\}//'
 }
 
 JSON=0
@@ -68,7 +74,8 @@ EXIT_CODE=0
 check_package() {
   local pkg="$1"
   local latest
-  latest=$(curl -sL --fail "https://registry.npmjs.org/${pkg}/latest" \
+  latest=$(FETCH_POLICY_SCRIPT="check-latest-version.sh" python3 "$HERE/fetch_policy.py" \
+    "https://registry.npmjs.org/${pkg}/latest" 2>/dev/null \
     | python3 -c "import json,sys; print(json.load(sys.stdin)['version'])" 2>/dev/null) || {
     echo "Error: could not resolve the latest version of \"${pkg}\" from the npm registry." >&2
     EXIT_CODE=2

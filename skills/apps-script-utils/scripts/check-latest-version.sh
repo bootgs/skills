@@ -14,14 +14,20 @@
 #   1  bad usage
 #   2  registry lookup failed
 #
+# Fetching goes through scripts/fetch_policy.py, which identifies this script
+# in its User-Agent, reads robots.txt first, paces requests, and stops rather
+# than retries on 403/429/503.
+#
 # Requires: curl, python3
 
 set -euo pipefail
 
+HERE="$(cd "$(dirname "$0")" && pwd)"
+
 PKG="apps-script-utils"
 
 usage() {
-  sed -n '2,15p' "$0" | sed 's/^# \{0,1\}//'
+  sed -n '2,21p' "$0" | sed 's/^# \{0,1\}//'
 }
 
 JSON=0
@@ -41,7 +47,8 @@ case "${1:-}" in
     ;;
 esac
 
-LATEST=$(curl -sL --fail "https://registry.npmjs.org/${PKG}/latest" \
+LATEST=$(FETCH_POLICY_SCRIPT="check-latest-version.sh" python3 "$HERE/fetch_policy.py" \
+  "https://registry.npmjs.org/${PKG}/latest" 2>/dev/null \
   | python3 -c "import json,sys; print(json.load(sys.stdin)['version'])" 2>/dev/null) || {
   echo "Error: could not resolve the latest version of \"${PKG}\" from the npm registry." >&2
   exit 2

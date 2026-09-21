@@ -19,8 +19,14 @@ Options:
 Exit codes:
   0  success
   1  bad usage
-  2  could not fetch or parse the docs page
+  2  could not fetch or parse the docs page (including a robots.txt refusal)
   3  --integration or --category matched nothing
+  4  the host told us to stop (403, 429, 503) — wait, do not retry
+
+Fetching goes through fetch_policy.py next to this script: it identifies this
+script and the repository in the User-Agent, reads robots.txt before the target,
+never exceeds one request per second per host, and stops rather than retries on
+403/429/503. There is no flag to turn any of that off.
 
 Requires: Python 3 standard library only, plus the `curl` binary (used for
 the actual HTTPS fetch — more reliably configured with a system CA bundle
@@ -32,19 +38,24 @@ import argparse
 import html
 import json
 import re
-import subprocess
 import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from fetch_policy import FetchDisallowed, FetchStopped, PolicyFetcher  # noqa: E402
 
 URL = "https://developers.google.com/workspace/marketplace/about-app-review"
 
+SCRIPT_NAME = "fetch-review-requirements.py"
+
 
 def fetch(url: str) -> str:
-    result = subprocess.run(
-        ["curl", "-sL", "--fail", "--max-time", "15", url],
-        capture_output=True,
-        check=True,
-    )
-    return result.stdout.decode("utf-8", errors="replace")
+    """Fetches under the shared policy. Provenance goes to stderr, body returned."""
+    fetcher = PolicyFetcher(SCRIPT_NAME)
+    result = fetcher.fetch(url)
+    print(result.provenance, file=sys.stderr)
+    return result.body
 
 
 def strip_tags(fragment: str) -> str:
@@ -113,7 +124,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Fetch the current Google Workspace Marketplace app review checklist "
         f"from {URL} — not a hardcoded copy, always the live page.",
-        epilog="Exit codes: 0 success, 1 bad usage, 2 fetch/parse failure, 3 --integration/--category matched nothing.",
+        epilog="Exit codes: 0 success, 1 bad usage, 2 fetch/parse failure, 3 --integration/--category matched nothing, 4 host said stop (403/429/503).",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument("--integration", help='e.g. "Google Workspace add-on", "Editor add-on", "Web app", "Drive app", "Google Chat app"')
@@ -124,9 +135,18 @@ def main() -> int:
 
     try:
         source_html = fetch(URL)
+    except FetchStopped as stopped:
+        # The host said no. Report it; a retry loop is how a polite tool gets blocked.
+        print(f"Error: {stopped}", file=sys.stderr)
+        return 4
+    except FetchDisallowed as disallowed:
+        print(f"Error: {disallowed}", file=sys.stderr)
+        return 2
+
+    try:
         data = parse(source_html)
-    except Exception as error:  # noqa: BLE001 — surface any fetch/parse failure uniformly
-        print(f"Error: could not fetch or parse {URL}: {error}", file=sys.stderr)
+    except Exception as error:  # noqa: BLE001 — surface any parse failure uniformly
+        print(f"Error: could not parse {URL}: {error}", file=sys.stderr)
         return 2
 
     if args.list_integrations:
