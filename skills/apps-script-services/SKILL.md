@@ -1,6 +1,6 @@
 ---
 name: apps-script-services
-description: Idiomatic, quota-safe patterns for Google Apps Script's built-in services and runtime — batched SpreadsheetApp reads/writes, PropertiesService/CacheService for state, LockService for concurrency safety, UrlFetchApp with retry/backoff, V8 runtime API gaps, and custom spreadsheet function constraints. Use when Apps Script code is slow, hits quota or rate-limit errors, has race conditions from concurrent trigger executions, or needs a browser/Node API that doesn't exist in Apps Script. Framework-agnostic — applies with or without bootgs.
+description: Idiomatic, quota-safe patterns for Google Apps Script's built-in services and runtime — batched SpreadsheetApp reads/writes, PropertiesService/CacheService for state, LockService for concurrency safety, UrlFetchApp with retry/backoff, V8 runtime API gaps, and custom spreadsheet function constraints. Use when Apps Script code is slow, hits quota or rate-limit errors, has race conditions from concurrent trigger executions, or needs a browser/Node API that doesn't exist in Apps Script. Framework-agnostic — applies with or without bootgs. Not for menus, sidebars or dialogs (`apps-script-ui`), nor for trigger registration and simple-vs-installable questions (`apps-script-triggers`).
 license: Apache-2.0
 compatibility: scripts/check-quotas.sh requires curl and python3.
 metadata:
@@ -12,6 +12,7 @@ metadata:
 
 ## Available scripts
 
+- **`scripts/fetch_policy.py`** — the shared fetching contract the script below fetches through: it names the script and the repository in the User-Agent, reads `robots.txt` before the target, paces requests, and stops rather than retries on 403/429/503. Vendored from `template/scripts/fetch_policy.py`; don't edit it here.
 - **`scripts/check-quotas.sh`** — fetches current Apps Script quotas/limitations from the official docs (see Checking current quotas below). Run with `--help` for options.
 
 ## SpreadsheetApp: batch, don't loop
@@ -114,7 +115,7 @@ function MY_FUNC(input: string): string {
 ```
 
 - The `@customfunction` JSDoc tag is required — without it, the function isn't exposed as a formula even if public.
-- Execution limit is **30 seconds**, not the usual 6 minutes.
+- Execution limit is **30 seconds**, against the usual 6 minutes for everything else. Both are Google's to change without notice — `scripts/check-quotas.sh "Custom function"` and `scripts/check-quotas.sh "runtime"` return the current numbers.
 - Cannot call services that require authorization or UI: `MailApp`, `UrlFetchApp`, `SpreadsheetApp.getUi()`, and triggers are all unavailable. `Utilities` and `CacheService` are fine.
 
 ## Checking current quotas
@@ -138,4 +139,4 @@ It covers everything on the docs page's quotas/limitations tables (execution tim
 - [ ] Any handler that reads-then-writes shared state across concurrent trigger executions is wrapped in a `LockService` lock with an explicit timeout.
 - [ ] `UrlFetchApp.fetch` calls set `muteHttpExceptions: true` and check `getResponseCode()` explicitly, with backoff on 429/5xx.
 - [ ] No code assumes `setTimeout`, `fetch`, `FormData`, `URL`, or `crypto` exist — each has an Apps Script replacement in use instead.
-- [ ] Every `@customfunction` avoids `MailApp`, `UrlFetchApp`, and `SpreadsheetApp.getUi()`, and completes well under 30 seconds.
+- [ ] Every `@customfunction` avoids `MailApp`, `UrlFetchApp`, and `SpreadsheetApp.getUi()`, and completes well under the custom-function runtime limit (30 seconds at the time of writing — `scripts/check-quotas.sh "Custom function"` confirms it).
