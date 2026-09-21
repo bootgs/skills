@@ -20,7 +20,11 @@
 #   0  success
 #   1  bad usage
 #   2  could not fetch or parse the docs page
-#   3  KEYWORD matched no rows
+#   3  KEYWORD matched no rows, or the host told us to stop (403/429/503)
+#
+# Fetching goes through scripts/fetch_policy.py, which identifies this script
+# in its User-Agent, reads robots.txt first, paces requests, and stops rather
+# than retries on 403/429/503.
 #
 # Requires: curl, python3
 
@@ -29,7 +33,7 @@ set -euo pipefail
 URL="https://developers.google.com/apps-script/guides/services/quotas"
 
 usage() {
-  sed -n '2,25p' "$0" | sed 's/^# \{0,1\}//'
+  sed -n '2,29p' "$0" | sed 's/^# \{0,1\}//'
 }
 
 case "${1:-}" in
@@ -47,10 +51,9 @@ fi
 
 KEYWORD="${1:-}"
 
-HTML=$(curl -sL --fail "$URL") || {
-  echo "Error: failed to fetch $URL" >&2
-  exit 2
-}
+HERE="$(cd "$(dirname "$0")" && pwd)"
+
+HTML=$(FETCH_POLICY_SCRIPT="check-quotas.sh" python3 "$HERE/fetch_policy.py" "$URL") || exit $?
 
 TEXT=$(echo "$HTML" | python3 -c "
 import re, sys
