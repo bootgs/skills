@@ -1,6 +1,6 @@
 ---
 name: bootgs-quickstart
-description: Bootstraps a new Google Apps Script project on the bootgs framework (decorator-based routing and DI, Spring Boot/NestJS style). Covers the TypeScript config, appsscript.json manifest, clasp config, entry-point wiring (createApp/createAsyncApp, doGet/doPost/onOpen/onInstall/onMenu), directory layout, and build/deploy scripts. Use when starting a new bootgs project, adding bootgs to an existing Apps Script project, or when doGet/doPost/entry-point wiring needs to be set up or is misbehaving.
+description: Bootstraps a new Google Apps Script project on the bootgs framework (decorator-based routing and DI, Spring Boot/NestJS style). Covers the TypeScript config, appsscript.json manifest, clasp config, entry-point wiring (createApp/createAsyncApp, doGet/doPost/onOpen/onInstall/onMenu), directory layout, and build/deploy scripts. Use when starting a new bootgs project, adding bootgs to an existing Apps Script project, or when doGet/doPost/entry-point wiring needs to be set up or is misbehaving. Not for layering rules once the project has grown (`bootgs-architecture`), parameter validation (`bootgs-validation`), or calling the backend from a UI (`bootgs-client`).
 license: Apache-2.0
 compatibility: Requires Node.js >=22.14.0 and npm; scripts/check-latest-version.sh additionally requires curl and python3.
 metadata:
@@ -15,6 +15,7 @@ metadata:
 
 - **`assets/tsconfig.appsscript.json`** — starting `tsconfig.json`, see TypeScript configuration below.
 - **`assets/appsscript.json`** — starting manifest, see Manifest below.
+- **`scripts/fetch_policy.py`** — the shared fetching contract the version check fetches through: it names the script and the repository in the User-Agent, reads `robots.txt` before the target, paces requests, and stops rather than retries on 403/429/503. Vendored from `template/scripts/fetch_policy.py`; don't edit it here.
 - **`scripts/check-latest-version.sh`** — checks the current published `bootgs`/`apps-script-utils` versions against what's installed. Run with `--help` for options.
 
 ## Install

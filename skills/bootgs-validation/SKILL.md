@@ -1,6 +1,6 @@
 ---
 name: bootgs-validation
-description: Documents bootgs' parameter-level validation decorators (@Min, @Max, @Email, @Pattern, @Size, @NotBlank, @NotEmpty, @AssertTrue, @AssertFalse, @Positive, @PositiveOrZero, @Negative, @NegativeOrZero), the built-in Parse pipes, and how to write custom pipes with @UsePipes. Use when adding input validation or type coercion to a bootgs controller method, or when invalid input reaches a handler unrejected.
+description: Documents bootgs' parameter-level validation decorators (@Min, @Max, @Email, @Pattern, @Size, @NotBlank, @NotEmpty, @AssertTrue, @AssertFalse, @Positive, @PositiveOrZero, @Negative, @NegativeOrZero), the built-in Parse pipes, and how to write custom pipes with @UsePipes. Use when adding input validation or type coercion to a bootgs controller method, or when invalid input reaches a handler unrejected. Not for requests that never reach the handler at all — an apiPrefix or event-shape problem belongs to `bootgs-client` — nor for layering rules (`bootgs-architecture`).
 license: Apache-2.0
 metadata:
   author: Maksym Stoianov

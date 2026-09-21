@@ -1,6 +1,6 @@
 ---
 name: bootgs-openapi
-description: Generates an OpenAPI 3.0 specification from bootgs @RestController classes via static TypeScript AST analysis (not runtime reflection), and documents the DTO-first contract workflow between a bootgs backend and its client. Use when adding or changing a bootgs endpoint, keeping openapi.json in sync with controllers, or generating a typed client from a bootgs backend.
+description: Generates an OpenAPI 3.0 specification from bootgs @RestController classes via static TypeScript AST analysis (not runtime reflection), and documents the DTO-first contract workflow between a bootgs backend and its client. Use when adding or changing a bootgs endpoint, keeping openapi.json in sync with controllers, or generating a typed client from a bootgs backend. Not for writing the client that consumes the spec or for debugging a route miss (`bootgs-client`), nor for entry-point wiring (`bootgs-quickstart`).
 license: Apache-2.0
 compatibility: Requires Node.js and the `typescript` package (already a devDependency in any TS-based bootgs project).
 metadata:

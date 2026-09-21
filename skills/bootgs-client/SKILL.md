@@ -1,6 +1,6 @@
 ---
 name: bootgs-client
-description: Explains bootgs' Virtual Transport Layer contract (how doGet/doPost events must be shaped for the router to resolve a controller method) and how to build a client that calls a bootgs backend from a web app UI, an HtmlService sidebar/dialog via google.script.run, or a deployed web app URL. Use when building a frontend that talks to bootgs controllers, or when requests aren't reaching the expected route.
+description: Explains bootgs' Virtual Transport Layer contract (how doGet/doPost events must be shaped for the router to resolve a controller method) and how to build a client that calls a bootgs backend from a web app UI, an HtmlService sidebar/dialog via google.script.run, or a deployed web app URL. Use when building a frontend that talks to bootgs controllers, or when requests aren't reaching the expected route. Not for generating or syncing the spec itself (`bootgs-openapi`), nor for wiring the server's entry points (`bootgs-quickstart`).
 license: Apache-2.0
 metadata:
   author: Maksym Stoianov

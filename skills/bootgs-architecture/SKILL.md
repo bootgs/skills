@@ -1,6 +1,6 @@
 ---
 name: bootgs-architecture
-description: Establishes a strict layered architecture for a bootgs project — Controller → Service → Repository → Domain, one-directional dependencies, an Interface+Impl naming convention, and a working eslint-plugin-boundaries config that enforces it mechanically. Use when structuring a bootgs backend beyond a single controller, reviewing a PR that adds a repository or service, or when "hold the layering by discipline" has already broken down once.
+description: Establishes a strict layered architecture for a bootgs project — Controller → Service → Repository → Domain, one-directional dependencies, an Interface+Impl naming convention, and a working eslint-plugin-boundaries config that enforces it mechanically. Use when structuring a bootgs backend beyond a single controller, reviewing a PR that adds a repository or service, or when "hold the layering by discipline" has already broken down once. Not for initial project setup or entry-point wiring (`bootgs-quickstart`), nor for validating a handler's inputs (`bootgs-validation`).
 license: Apache-2.0
 metadata:
   author: Maksym Stoianov
