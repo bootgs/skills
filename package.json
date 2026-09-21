@@ -1,6 +1,7 @@
 {
   "name": "bootgs-skills",
   "version": "0.5.0",
+  "type": "module",
   "private": true,
   "description": "Agent Skills for the boot.gs Google Apps Script framework and plain Google Apps Script development.",
   "keywords": [
@@ -28,12 +29,24 @@
   },
   "license": "Apache-2.0",
   "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:live": "LIVE=1 vitest run tests/template/integration",
+    "test:behaviour": "node --experimental-strip-types scripts/testkit/gen-behaviour.ts --check && claude plugin eval . --eval-dir tests/skills --allow-tools Bash WebFetch",
+    "test:behaviour:gen": "node --experimental-strip-types scripts/testkit/gen-behaviour.ts",
     "skills:init": "npx --yes skills init",
     "skills:add": "npx --yes skills add --agent '*' --yes",
     "skills:list": "npx --yes skills list",
     "skills:find": "npx --yes skills find",
     "skills:use": "npx --yes skills use",
     "skills:update": "npx --yes skills update --yes",
-    "skills:remove": "npx --yes skills remove --yes"
+    "skills:remove": "npx --yes skills remove --yes",
+    "sync:fetch-policy": "node scripts/sync-fetch-policy.ts",
+    "test:prove": "node scripts/prove-lint.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.1"
   }
 }

@@ -5,3 +5,10 @@
 .junie/
 __pycache__/
 node_modules/
+
+# Nothing a skill fetched goes into version control.
+corpus/*
+!corpus/README.md
+
+# `claude plugin eval` writes its run output here.
+tests/skills/results/
