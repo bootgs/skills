@@ -7,13 +7,15 @@
     {
       "name": "bootgs",
       "source": "./plugins/bootgs",
-      "description": "Skills for building Google Apps Script backends with the bootgs framework: project bootstrap, parameter validation, client/Virtual Transport Layer, and OpenAPI generation.",
+      "description": "Skills for building Google Apps Script backends with the bootgs framework: project bootstrap, layered architecture enforcement, parameter validation, client/Virtual Transport Layer, and OpenAPI generation.",
+      "license": "Apache-2.0",
       "category": "Google Apps Script"
     },
     {
       "name": "apps-script",
       "source": "./plugins/apps-script",
-      "description": "Framework-agnostic Google Apps Script skills — triggers, built-in services, the clasp CLI workflow, the apps-script-utils guard/utility library, and Marketplace publishing/compliance.",
+      "description": "Framework-agnostic Google Apps Script skills — triggers, built-in services, UI (menus/sidebars/dialogs), the clasp CLI workflow, the apps-script-utils guard/utility library, and Marketplace publishing/compliance. Usable without bootgs; apps-script-utils also pairs naturally with it.",
+      "license": "Apache-2.0",
       "category": "Google Apps Script"
     }
   ]
