@@ -104,10 +104,19 @@ npm run skills:remove           # remove an installed skill
 
 `skills:add` always targets `--agent '*'`: everything installs into `.agents/skills/` as the canonical copy, and the CLI symlinks it into whichever other agent directories already exist in the project — there's no hardcoded agent list to keep in sync, since a clone of this repo may be used with agents we don't know about in advance.
 
-This repository's own tooling — the [`skill-creator`](https://github.com/anthropics/skills/tree/main/skills/skill-creator) skill, used to draft and iterate on the skills above — lives under `.agents/skills/`, installed the same way:
+This repository's own tooling lives under `.agents/skills/`, installed the same way. [`skills-lock.json`](./skills-lock.json) is the single source of truth for what's there:
+
+| Skill | Used for |
+|---|---|
+| [`skill-creator`](https://github.com/anthropics/skills/tree/main/skills/skill-creator) | Drafting and iterating on the skills above. |
+| [`create-pr`](https://github.com/MaksymStoianov/skills/tree/main/skills/create-pr) | Opening a pull request with the title convention and PR template this repository already uses. |
+| [`gitea-tea`](https://github.com/MaksymStoianov/skills/tree/main/skills/gitea-tea) | Issues and pull requests on a Gitea server, through the `tea` CLI. |
+
+These are maintenance tooling, not part of what you install: `package.json`'s `files` allowlist excludes `.agents/`, so none of them reach the npm tarball.
 
 ```bash
 npm run skills:add -- anthropics/skills --skill skill-creator
+npm run skills:update    # refresh all three
 ```
 
 ### Maintenance agents
