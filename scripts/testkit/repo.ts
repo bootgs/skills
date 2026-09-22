@@ -259,13 +259,21 @@ export function skillNames(): string[] {
     .sort();
 }
 
+/**
+ * Build artefacts that appear beside a skill's files the moment someone runs
+ * one of its scripts. They are git-ignored, so treating them as shipped files
+ * would fail the contract for anyone who has actually used the skill.
+ */
+const NOT_SHIPPED = new Set([".DS_Store", "__pycache__", ".pytest_cache", ".ruff_cache"]);
+
 function walk(dir: string): string[] {
   if (!existsSync(dir)) return [];
   const out: string[] = [];
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    if (NOT_SHIPPED.has(entry.name)) continue;
     const full = join(dir, entry.name);
     if (entry.isDirectory()) out.push(...walk(full));
-    else if (entry.isFile() && entry.name !== ".DS_Store") out.push(full);
+    else if (entry.isFile() && !entry.name.endsWith(".pyc")) out.push(full);
   }
   return out;
 }

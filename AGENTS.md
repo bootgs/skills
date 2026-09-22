@@ -194,6 +194,10 @@ be green before a commit. `TESTING.md` is the reference.
 - **Never hand-edit `tests/skills/*/behaviour/`.** It is generated from each
   skill's `evals.ts` by `npm run test:behaviour:gen`, committed so it is
   reviewable in a diff, and `tests/repo/` fails when it has drifted.
+- **`npm test` is offline and must stay offline.** The live cases skip unless
+  `LIVE=1`, so CI never depends on a vendor being up. Run `npm run test:live`
+  by hand before a release: it is the only layer that catches a docs page
+  restructuring under a shipped script.
 - **The behaviour layer is a release gate, never a commit gate.** It spends
   money: 22 cases × 2 runs × 2 arms. Validate it for free with
   `--max-cost-usd 0`, which loads every case and aborts before spending.
