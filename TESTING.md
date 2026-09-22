@@ -7,15 +7,20 @@ Five layers. Only the last costs money.
 | Contract | `tests/skills/<name>/` | the skill is well-formed *for its family*, every figure is pinned or declared unpinnable, every cross-reference resolves | vitest |
 | Unit | `tests/template/unit/` | the shared fetching module in isolation | vitest |
 | Integration | `tests/template/integration/` | the fetching rules bind, over real HTTP against a loopback fixture | vitest |
+| Live | `tests/template/integration/live.test.ts` | the shipped scripts still parse the real pages, and every value a skill documents still exists | vitest, `LIVE=1` |
 | Repo | `tests/repo/` | invariants no single skill can see | vitest |
 | Behaviour | `tests/skills/<name>/behaviour/` | the skill changes what the model does | `claude plugin eval` |
 
 ```bash
-npm test                  # layers 1–4
+npm test                  # layers 1–4, offline
 npm run test:watch
+npm run test:live         # the same fetching rules against the real hosts
 npm run test:prove        # break the tree on purpose; fail if the suite stays green
 npm run test:behaviour    # layer 5 — spends money, see the budget below
 ```
+
+`npm test` never leaves the machine: the live cases skip unless `LIVE=1`, so
+CI stays offline and a vendor's outage can never turn the suite red.
 
 **The skill is the unit under test.** `tests/skills/<name>/` is its test
 directory. One thin file per skill sits over a shared contract:
@@ -102,6 +107,23 @@ Every script that reaches the network goes through
 - says when an answer came from a stored copy instead of the live source.
 
 Nothing a skill fetched goes into version control — see `corpus/README.md`.
+
+## The live layer
+
+The fixture layer proves the rules bind over real HTTP, but every response it
+grades is one this repository wrote. It cannot catch the failure that actually
+happens: a vendor restructures a page and a shipped script stops parsing it, or
+a value a skill documents stops existing.
+
+`npm run test:live` covers that: `robots.txt` on each real host, every shipped
+fetching script end to end, and a check that every `--integration` value the
+marketplace skill documents still appears on Google's page. That last one is
+there because `Drive app` was documented here while Google called it
+`Google Drive app` — found by running a script by hand, not by a test.
+
+It is slow on purpose. The fetching policy paces itself to one request per
+second per host and reads `robots.txt` before each origin; that is the
+behaviour under test, not overhead to route around.
 
 ## Behaviour layer
 
