@@ -235,7 +235,7 @@ apply here — do not reintroduce it.
 - `package.json` still carries `"private": true`. That is a publishing
   decision, not a licensing one, and it is the only thing preventing an
   `npm publish`. The `files` allowlist is already correct for the day it is
-  removed: tests, the harness, `TESTING.md` and `ISSUES-FOUND.md` do not ship.
+  removed: the tests, the harness and `TESTING.md` do not ship.
 
 ## 11. Claims about third parties carry their evidential strength
 
