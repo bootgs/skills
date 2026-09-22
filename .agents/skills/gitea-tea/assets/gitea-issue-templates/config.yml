@@ -1,0 +1,15 @@
+# .gitea/issue_template/config.yml
+#
+# Controls the template picker shown when someone clicks "New issue":
+# - blank_issues_enabled: false forces picking a template instead of filing
+#   a blank issue. Set true if the repo also wants to allow free-form issues.
+# - contact_links redirect a category this tracker doesn't accept (e.g.
+#   general questions) to somewhere better than a closed issue.
+#
+# Adjust or remove contact_links entries that don't apply to this project.
+
+blank_issues_enabled: false
+contact_links:
+  - name: Questions & discussion
+    url: https://example.org/forum
+    about: Ask general questions here instead of opening an issue

@@ -45,12 +45,12 @@ These look like they might be, and are not:
 - **`LICENSE`** at the repository root is this project's own licence. Its terms
   are the canonical Apache-2.0 text; only the appendix and the copyright line
   differ, which is how the licence is meant to be applied.
-- **`.agents/skills/create-pr/`** is installed from the owner's own public
-  `MaksymStoianov/skills`, under the same Apache-2.0 licence as this
-  repository, so it raises no third-party obligation. Its provenance is
-  recorded in `skills-lock.json`, which is the single source of truth for what
-  is installed here; it is not vendored by hand and is not shipped in the npm
-  tarball.
+- **`.agents/skills/create-pr/`** and **`.agents/skills/gitea-tea/`** are
+  installed from the owner's own public `MaksymStoianov/skills`, under the same
+  Apache-2.0 licence as this repository, so they raise no third-party
+  obligation. Their provenance is recorded in `skills-lock.json`, which is the
+  single source of truth for what is installed here; they are not vendored by
+  hand and are not shipped in the npm tarball.
 - **`template/scripts/fetch_policy.py`** and its vendored copies under
   `skills/*/scripts/` are this repository's own code. They are duplicated so
   each skill stays self-contained when installed alone, not because they came
