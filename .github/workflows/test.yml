@@ -1,0 +1,47 @@
+# Runs every layer that costs nothing. The behaviour layer is deliberately
+# absent: it spends money and needs a model credential, so it stays a release
+# gate run by hand (AGENTS.md rule 9). What runs here is the check that the
+# committed behaviour tree still matches the eval sets it was generated from.
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # Node 24 executes .ts directly, which the harness relies on.
+          node-version: '24'
+          cache: npm
+
+      # The fetching policy under test is Python, reached through
+      # scripts/testkit/bridge.py, so the unit and integration layers need it.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: npm ci
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Contract, unit, integration and repo layers
+        run: npm test
+
+      - name: Behaviour case tree matches its source
+        run: node scripts/testkit/gen-behaviour.ts --check
+
+      # A green suite is only evidence if red is reachable: this breaks the
+      # tree on purpose, one mutation at a time, and fails if nothing notices.
+      - name: Every check still fires
+        run: npm run test:prove
