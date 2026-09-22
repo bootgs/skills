@@ -1,0 +1,59 @@
+# .gitea/issue_template/bug_report.yaml
+#
+# Gitea's structured issue-form format (same schema family as GitHub issue
+# forms). Rename/adjust the `labels` value to match labels that actually
+# exist in the target repo (check `tea labels list` first) — Gitea applies
+# them verbatim without creating anything new.
+
+name: Bug report
+about: Report a problem so it can be reproduced and fixed
+title: "[Bug]: "
+labels: ["Kind/Bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please fill in as much detail as you can — a report without reproduction steps is much harder to act on.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What went wrong?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Step-by-step, so the bug can be reproduced reliably
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should have happened instead?
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: e.g. v1.21.0
+    validations:
+      required: false
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - Other
+    validations:
+      required: false

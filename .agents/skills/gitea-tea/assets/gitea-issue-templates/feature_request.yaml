@@ -1,0 +1,37 @@
+# .gitea/issue_template/feature_request.yaml
+#
+# See bug_report.yaml for notes on the form schema. Adjust `labels` to
+# match labels that actually exist in the target repo.
+
+name: Feature request
+about: Propose a new capability or an improvement to an existing one
+title: "[Feature]: "
+labels: ["Kind/Feature"]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What problem does this solve, and for whom?
+    validations:
+      required: true
+  - type: textarea
+    id: background
+    attributes:
+      label: Background
+      description: Current behavior and the gap this closes
+    validations:
+      required: false
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: What you'd like to see
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+    validations:
+      required: false
