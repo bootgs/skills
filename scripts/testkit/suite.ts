@@ -60,6 +60,15 @@ export const UNPINNABLE_MARKERS = [
   "unpinnable",
 ] as const;
 
+/**
+ * A description states a trigger when it says "use" followed by a *condition*.
+ * Not just `when`: "Use before anything goes public" and "Use after a release"
+ * are triggers too, and rejecting them fires on correct content. `Use for ...`
+ * is deliberately excluded — that introduces a topic, which is a summary.
+ */
+export const TRIGGER_CLAUSE =
+  /\buse (?:this skill )?(?:when|before|after|whenever|while|if|during|any ?time)\b/i;
+
 /** A reference to a script that re-derives a figure from the live source. */
 const LIVE_CHECK = /\b(?:scripts\/)?[\w.-]*(?:check|fetch)-[\w.-]+\.(?:sh|py|ts)\b/;
 
@@ -199,7 +208,7 @@ export function describeSkill(name: string, extra?: (ctx: SkillContext) => void)
         expect(
           description,
           `${skill.file}: description has no "Use when ..." clause — a summary tells the model what the skill is about but never that this request is the one`,
-        ).toMatch(/\buse (?:this skill )?when\b/i);
+        ).toMatch(TRIGGER_CLAUSE);
       });
 
       vitestTest("hands off to a same-group sibling by name", () => {
