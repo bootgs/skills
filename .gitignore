@@ -9,6 +9,9 @@ node_modules/
 # Nothing a skill fetched goes into version control.
 corpus/*
 !corpus/README.md
+# A skill that caches fetched pages resolves its corpus from the working
+# directory, which lands here because the root carries every project marker.
+sources/
 
 # `claude plugin eval` writes its run output here.
 tests/skills/results/
