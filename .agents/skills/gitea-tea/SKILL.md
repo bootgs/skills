@@ -5,7 +5,8 @@ license: Apache-2.0
 compatibility: Requires the tea CLI (https://gitea.com/gitea/tea); scripts/check-exclusive-labels.sh requires python3.
 metadata:
   author: Maksym Stoianov
-  version: "1.3.0"
+  copyright: "2026 Maksym Stoianov"
+  version: "1.3.1"
 ---
 
 # Gitea tea

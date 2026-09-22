@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # Detecting a repository's PR conventions
 
 Don't assume Conventional Commits — confirm it. Check these, in order, and

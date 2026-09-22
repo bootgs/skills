@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: Apache-2.0
 # Validates a PR title against a Conventional-Commits-shaped pattern before
 # it reaches `gh pr create`, which won't catch a malformed title itself —
 # CI does, but only after the PR already exists.

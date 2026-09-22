@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: Apache-2.0
 # test-check-exclusive-labels.sh — regression tests for check-exclusive-labels.sh.
 #
 # Run this after touching that script, or periodically, to confirm the

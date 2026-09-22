@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # tea CLI reference
 
 Flags verified against `tea`'s own generated reference (`docs/CLI.md` in [gitea/tea](https://gitea.com/gitea/tea)). Load this file when a command needs a flag not shown in `SKILL.md`'s examples — don't guess a flag name.

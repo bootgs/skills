@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # Issue body templates by type
 
 Use these only when the repo has no issue template of its own (see

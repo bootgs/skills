@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 # .gitea/issue_template/config.yml
 #
 # Controls the template picker shown when someone clicks "New issue":

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 # .gitea/issue_template/bug_report.yaml
 #
 # Gitea's structured issue-form format (same schema family as GitHub issue

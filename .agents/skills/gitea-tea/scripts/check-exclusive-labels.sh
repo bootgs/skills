@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: Apache-2.0
 # check-exclusive-labels.sh — catches the mistake `tea` itself can't catch:
 # two labels from the same exclusive scope (e.g. "Kind/Bug" and
 # "Kind/Feature") passed to the same issue/PR command. tea's label

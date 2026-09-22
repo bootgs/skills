@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
 # Detecting a repo's own issue conventions
 
 Gitea labels/scopes and issue templates are per-repository configuration.

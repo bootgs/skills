@@ -5,7 +5,8 @@ license: Apache-2.0
 compatibility: Requires git and the GitHub CLI (`gh`), authenticated (`gh auth status`). scripts/validate-pr-title.sh requires bash.
 metadata:
   author: Maksym Stoianov
-  version: "2.1.0"
+  copyright: "2026 Maksym Stoianov"
+  version: "2.1.1"
 ---
 
 # Create Pull Request
