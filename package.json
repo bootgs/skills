@@ -28,6 +28,19 @@
     "url": "https://maksymstoianov.com"
   },
   "license": "Apache-2.0",
+  "files": [
+    "skills/",
+    "template/",
+    "plugins/",
+    ".claude-plugin/",
+    ".cursor-plugin/",
+    "plugin.json",
+    "gemini-extension.json",
+    "skills.sh.json",
+    "skills-lock.json",
+    "llms.txt",
+    "THIRD-PARTY.md"
+  ],
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",

@@ -20,11 +20,21 @@ vendored content is added without being listed here.
 | Licence text | `.agents/skills/skill-creator/LICENSE.txt`, retained verbatim |
 | Recorded in | `skills-lock.json` (`sourceType: github`, with the content hash it was vendored at) |
 
-Vendored, not modified. Upstream ships no `NOTICE` file, so there is none to
-propagate; the `LICENSE.txt` that ships beside the skill is the whole of the
-notice that must travel with it. If this copy is ever updated, update
-`skills-lock.json`'s `computedHash` in the same commit so the two cannot
-disagree about which version is present.
+Vendored, not modified — verified 2026-09-22 by comparing this copy of
+`SKILL.md` byte for byte against the current upstream file (identical, 33168
+bytes). Upstream ships no `NOTICE`, at the repository root or beside the skill,
+so there is none to propagate; the `LICENSE.txt` that ships next to the skill is
+the whole of the notice that must travel with it.
+
+`skills-lock.json` records a `computedHash` for this entry. It is produced by
+the `skills` CLI and is **not** a SHA-256 of `SKILL.md` — neither this copy nor
+upstream hashes to it — so do not try to verify or update it by hand. Re-run the
+CLI (`npm run skills:update`) when refreshing the copy, and commit the lockfile
+it writes.
+
+This directory is published through git, not through the npm tarball:
+`package.json`'s `files` allowlist excludes it, so the package does not
+redistribute it.
 
 ---
 
