@@ -20,6 +20,23 @@ The lockfile's `computedHash` is written by the `skills` CLI. It is **not** a
 SHA-256 of `SKILL.md` — neither the vendored copy nor upstream hashes to it —
 so never try to verify or update it by hand. Re-run `npm run skills:update`.
 
+**The installer leaves three things behind. Check for them after every add:**
+
+- A stray `agent/` directory at the repository root, holding a second copy of
+  the skill. Delete it.
+- A symlink `skills/<name>` pointing into `.agents/skills/`. Delete it too:
+  `skills/` is for skills authored here, and the npm `files` allowlist ships
+  that directory, so an installed skill would leave in the tarball. The
+  contract suite currently ignores it only because a symlink is not a
+  directory — do not rely on that.
+- The Claude Code copy fails under the Bash sandbox with
+  `EPERM: mkdir '.claude/skills/<name>'`, because that path is in the deny
+  list. Finish it by hand, matching the existing entries, which are symlinks:
+  `ln -s ../../.agents/skills/<name> .claude/skills/<name>`.
+
+What should remain is the real directory under `.agents/skills/<name>`, a
+symlink to it from `.claude/skills/<name>`, and the `skills-lock.json` entry.
+
 ## 2. Every bug and every feature gets an issue, and a commit closes it
 
 1. **Issue first.** Before fixing a bug or building a feature, open one:
