@@ -248,13 +248,32 @@ labelling is what makes it safe to publish, so do not "tighten" it away.
 Never assert wrongdoing by a named person or company. Never state that a name
 is free to use, or that no patent applies.
 
-## 12. Before anything leaves this repository
+## 12. English, and nothing named that does not need naming
+
+**Everything written here is in English** — files, documentation, commit
+messages, issue titles and bodies, pull request titles and bodies, code
+comments. The conversation that produces a change may be in any language; what
+lands in the repository or on its issue tracker is not. This is a public
+repository whose skills, README and commit log address an English-speaking
+audience, and an issue tracker in another language explains them to nobody.
+
+Thirteen issues and one pull request had to be rewritten once for this reason.
+Translate before opening, not after.
+
+**Do not name what does not need naming.** Anything published from here — a
+commit, an issue, a pull request, a file — refers to "a private repository"
+rather than its path, and does not carry internal hostnames. A remote is
+configured locally and never needs to appear in an issue. This is not secrecy
+about the owner's own material; it is that the name is never the load-bearing
+part of the sentence, so it costs nothing to leave out.
+
+## 13. Before anything leaves this repository
 
 Run a pre-publication legal check against it and act on the blockers — the
 audit covers the history, not just the working tree.
 
 The `legal-publish-check` skill that does this is **not** in this repository. It
-lives in the private `MaksymStoianov/skills-private`, is licensed
-`LicenseRef-Proprietary`, and must not be copied here: a proprietary skill in a
-public Apache-2.0 tree would be a licence violation, and `tests/repo/` would
-fail on it. Run it from there, or read it there and apply it by hand.
+lives in a private repository of the owner's, under a proprietary licence, and
+must not be copied here: a proprietary skill in a public Apache-2.0 tree would
+be a licence violation, and `tests/repo/` would fail on it. Run it from there,
+or read it there and apply it by hand.
