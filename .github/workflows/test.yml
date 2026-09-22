@@ -16,9 +16,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           # Node 24 executes .ts directly, which the harness relies on.
           node-version: '24'
@@ -26,7 +26,7 @@ jobs:
 
       # The fetching policy under test is Python, reached through
       # scripts/testkit/bridge.py, so the unit and integration layers need it.
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
 
