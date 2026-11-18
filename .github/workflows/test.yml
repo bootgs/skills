@@ -16,9 +16,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           # Node 24 executes .ts directly, which the harness relies on.
           node-version: '24'
@@ -26,7 +28,7 @@ jobs:
 
       # The fetching policy under test is Python, reached through
       # scripts/testkit/bridge.py, so the unit and integration layers need it.
-      - uses: actions/setup-python@v7
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: '3.12'
 
@@ -45,3 +47,14 @@ jobs:
       # tree on purpose, one mutation at a time, and fails if nothing notices.
       - name: Every check still fires
         run: npm run test:prove
+
+  # Every file has copyright and licence information (REUSE.toml, LICENSES/).
+  reuse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: fsfe/reuse-action@676e2d560c9a403aa252096d99fcab3e1132b0f5 # v6.0.0
