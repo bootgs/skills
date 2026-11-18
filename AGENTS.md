@@ -231,8 +231,10 @@ apply here — do not reintroduce it.
   manifest**. The marketplace entry is what a consumer reads at install time,
   which makes it the worst place for the licence to be absent. A test covers
   each one.
+<!-- REUSE-IgnoreStart -->
 - Shared infrastructure carries `SPDX-License-Identifier: Apache-2.0` in its
   file header, so a copied file takes its licence with it.
+<!-- REUSE-IgnoreEnd -->
 - **Never write `UNLICENSED` into a field that expects SPDX.** It is npm's own
   convention, not an SPDX identifier, and the similar-looking `Unlicense` is a
   public-domain dedication meaning the opposite.
